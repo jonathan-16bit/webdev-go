@@ -6,6 +6,13 @@ import (
 )
 
 func home(w http.ResponseWriter, r *http.Request) {
+	// Restricting the root url pattern
+	// Returns "404 page not found" when URL path isn't exactly "/"
+	if r.URL.Path != "/" {
+		http.NotFound(w, r)
+		return
+	}
+
 	w.Write([]byte("hi from Snippetbox"))
 }
 
