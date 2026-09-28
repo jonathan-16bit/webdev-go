@@ -33,7 +33,13 @@ func snippetCreate(w http.ResponseWriter, r *http.Request) {
 	if r.Method != "POST" {
 		// Add a new header "Allow" to the response header map
 		// This lets the user know what request methods are supported for this particular URL
-		w.Header().Set("Allow", "POST")
+
+		// Constants:
+		/*
+		 * http.MethodPost: "POST"
+		 * http.StatusMethodNotAllowed: 405
+		*/
+		w.Header().Set("Allow", http.MethodPost)
 
 		// 405: Method not allowed
 		/*
@@ -41,7 +47,7 @@ func snippetCreate(w http.ResponseWriter, r *http.Request) {
 		w.Write([]byte("Method not allowed"))
 		*/
 		// Shorter ver of the above:
-		http.Error(w, "Method not allowed", 405)
+		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
 		return
 	}
 
