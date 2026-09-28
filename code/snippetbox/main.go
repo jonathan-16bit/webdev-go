@@ -36,8 +36,12 @@ func snippetCreate(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Allow", "POST")
 
 		// 405: Method not allowed
+		/*
 		w.WriteHeader(405)
 		w.Write([]byte("Method not allowed"))
+		*/
+		// Shorter ver of the above:
+		http.Error(w, "Method not allowed", 405)
 		return
 	}
 
