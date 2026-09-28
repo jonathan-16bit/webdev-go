@@ -21,6 +21,22 @@ func snippetView(w http.ResponseWriter, r *http.Request) {
 }
 
 func snippetCreate(w http.ResponseWriter, r *http.Request) {
+	/*
+	 * We can only call w.WriteHeader() once per response, and after the status 
+	 * code is written, it cannot be changed.
+	 *
+	 * If we don't call w.WriteHeader() explicitly, then the first call to w.Write() 
+	 * will automatically send a 200 OK status code.
+	 * So, if we want to send a non-200 status code, we must call w.WriteHeader() before 
+	 * ANY call to w.Write()
+	*/
+	if r.Method != "POST" {
+		// 405: Method not allowed
+		w.WriteHeader(405)
+		w.Write([]byte("Method not allowed"))
+		return
+	}
+
 	w.Write([]byte("Create a new snippet..."))
 }
 
