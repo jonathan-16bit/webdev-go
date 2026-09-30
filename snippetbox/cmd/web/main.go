@@ -27,21 +27,10 @@ func main() {
 		infoLog: infoLog,
 	}
 
-	mux := http.NewServeMux()
-
-	// Creates handler that sends the requested file back
-	fileServer := http.FileServer(http.Dir("./ui/static"))
-	// Removing the "/static" prefix
-	mux.Handle("/static/", http.StripPrefix("/static", fileServer)) 
-
-	mux.HandleFunc("/", app.home)
-	mux.HandleFunc("/snippet/view", app.snippetView)
-	mux.HandleFunc("/snippet/create", app.snippetCreate)
-
 	srv := &http.Server{
 		Addr: *addr,
 		ErrorLog: errorLog,
-		Handler: mux,
+		Handler: app.routes(),
 	}
 
 	// flag.String() returns a pointer to the flag value, so we need to dereference it
