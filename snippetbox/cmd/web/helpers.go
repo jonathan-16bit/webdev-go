@@ -9,7 +9,7 @@ import (
 func (app *application) serverError(w http.ResponseWriter, err error) {
 	// Error message and stack trace (of current goroutine) to errorLog
 	trace := fmt.Sprintf("%s\n%s", err.Error(), debug.Stack())
-	app.errorLog.Println(trace)
+	app.errorLog.Output(2, trace)
 
 	// Generic 500 Internal Server Error response to user
 	http.Error(w, http.StatusText(http.StatusInternalServerError), http.StatusInternalServerError)
