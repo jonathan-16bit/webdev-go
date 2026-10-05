@@ -25,3 +25,8 @@ Snippet ID, the auto-incrementing primary key.
 ```sql
 id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT
 ```
+
+Creates an **index** on the `created` column (makes queries related to this column faster).  
+```sql
+CREATE INDEX idx_snippets_created ON snippets(created);
+```
