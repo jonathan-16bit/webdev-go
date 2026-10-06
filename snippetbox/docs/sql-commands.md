@@ -30,3 +30,11 @@ Creates an **index** on the `created` column (makes queries related to this colu
 ```sql
 CREATE INDEX idx_snippets_created ON snippets(created);
 ```
+
+Create a `web` MySQL user restricted to local connections.  
+```
+CREATE USER 'web'@'localhost';
+GRANT SELECT, INSERT, UPDATE, DELETE ON snippetbox.* TO 'web'@'localhost';
+-- Important: Make sure to swap 'pass' with a password of your own choosing.
+ALTER USER 'web'@'localhost' IDENTIFIED BY 'pass';
+```
